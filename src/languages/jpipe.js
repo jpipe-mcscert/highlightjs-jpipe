@@ -17,6 +17,8 @@ export default function(hljs) {
   };
 
   return {
+    disableAutodetect: true,
+
     name: 'JPipe',
     aliases: ['jpipe'],
     keywords: KEYWORDS,
@@ -32,50 +34,36 @@ export default function(hljs) {
         className: 'keyword'
       },
 
-      // 2) explicit "x supports y" pattern
+      // 2) refine function calls with parameters
+      {
+        begin: /\brefine\s*\(/,
+        end: /\)/,
+        returnEnd: true,
+        contains: [
+          { className: 'keyword', begin: /\brefine\b/ },
+          { className: 'variable', begin: IDENT },
+          { className: 'punctuation', begin: /[,()]/ }
+        ]
+      },
+
+      // 3) explicit "x supports y" pattern
       {
         begin: IDENT + '\\s+supports\\s+' + IDENT,
         end: /$/,
         keywords: { built_in: 'supports' }
       },
 
+      // 4) relations: "X supports Y", "X is Y"
       {
-        begin: /(justification)\s+([A-Za-z_][A-Za-z0-9_]*)\s+(is)\s+(refine)/,
-        end: /$/,
-        scope: {
-          1: 'title',
-          2: 'variable',
-          3: 'built_in',
-          4: 'keyword'
-        }
-      },
-      
-
-      // 3) relations: "X supports Y", "X is Y", "X refines Y"
-      {
-        match: new RegExp(`(${IDENT})\\s+(supports|is|refines)\\s+(${IDENT})`),
+        match: new RegExp(`(${IDENT})\\s+(supports|is)\\s+(${IDENT})`),
         scope: {
           1: 'variable',   // X
-          2: 'built_in',   // supports/is/refines
+          2: 'built_in',   // supports/is
           3: 'variable'    // Y
         }
       },
 
-      // 4) standalone built-in keywords (must come before title blocks)
-      {
-        match: /\b(supports|is|refines|assemble)\b/,
-        className: 'built_in'
-      },
-
-      // 5) function calls like refine(peer_buddy, recruitment)
-      {
-        match: /\b(refine)\s*\(/,
-        scope: {
-          1: 'keyword'
-        }
-      },
-
-      // 6) justification blocks with title
+      // 5) justification blocks with title
       {
         className: 'title',
         begin: /\bjustification\b/,
@@ -90,7 +78,7 @@ export default function(hljs) {
         ]
       },
 
-      // 7) pattern blocks
+      // 6) pattern blocks
       {
         className: 'title',
         begin: /\bpattern\b/,
@@ -105,7 +93,7 @@ export default function(hljs) {
         ]
       },
 
-      // 8) composition blocks
+      // 7) composition blocks
       {
         className: 'title',
         begin: /\bcomposition\b/,
@@ -120,7 +108,7 @@ export default function(hljs) {
         ]
       },
 
-      // 9) load statements
+      // 8) load statements
       {
         className: 'title',
         begin: /\bload\b/,
@@ -135,38 +123,21 @@ export default function(hljs) {
         ]
       },
 
-      // 10) function parameters (variables inside parentheses)
+      // 9) standalone keywords (must come after specific patterns)
       {
-        begin: /\(/,
-        end: /\)/,
-        contains: [
-          {
-            match: /\b[A-Za-z_][A-Za-z0-9_]*\b/,
-            className: 'variable'
-          },
-          { className: 'punctuation', begin: /[,]/ }
-        ]
+        match: /\b(refine|evidence|conclusion|sub-conclusion|strategy|hook|relation)\b/,
+        className: 'keyword'
+      },
+
+      // 10) standalone built-in keywords
+      {
+        match: /\b(supports|is|assemble)\b/,
+        className: 'built_in'
       },
 
       // 11) numbers & punctuation
       { className: 'number',   begin: '\\b\\d+(?:\\.\\d+)?\\b' },
-      { className: 'punctuation', begin: /[{}():,]/ },
-
-      // Explicit: variable is refine
-     
-
-      // Explicit: is refine (built_in followed by keyword)
-      {
-        match: [
-          /is/,     // 1: built_in
-          /\s+/,   // skip whitespace
-          /refine/  // 2: keyword
-        ],
-        scope: {
-          1: 'built_in',
-          2: 'keyword'
-        }
-      }
+      { className: 'punctuation', begin: /[{}():,]/ }
     ]
   };
 }

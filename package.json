@@ -4,8 +4,8 @@
   "description": "highlight.js syntax definition for the JPipe language",
   "main": "src/languages/jpipe.js",
   "scripts": {
-    "build": "node ../highlight.js/tools/build.js -t cdn --extra=.",
-    "test":  "node ../highlight.js/tools/build.js -t node --extra=."
+    "build": "cd ../highlight.js && node tools/build.js -t cdn",
+    "test":  "cd ../highlight.js && node tools/build.js -t node"
   },
   "repository": {
     "type": "git",
