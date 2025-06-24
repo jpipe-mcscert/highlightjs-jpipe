@@ -1,0 +1,5 @@
+<pre><code class="language-jpipe">
+<span class="hljs-keyword">justification</span> <span class="hljs-title class">example</span> {
+  <span class="hljs-keyword">conclusion</span> <span class="hljs-variable">c</span> <span class="hljs-built_in">is</span> <span class="hljs-string">"all data is available"</span>
+}
+</code></pre>
