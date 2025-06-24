@@ -1,0 +1,29 @@
+{
+  "name": "highlightjs-jpipe",
+  "version": "1.0.0",
+  "description": "highlight.js syntax definition for the JPipe language",
+  "main": "src/languages/jpipe.js",
+  "scripts": {
+    "build": "node ../highlight.js/tools/build.js -t cdn --extra=.",
+    "test":  "node ../highlight.js/tools/build.js -t node --extra=."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jpipe-mcscert/highlightjs-jpipe.git"
+  },
+  "keywords": [
+    "jpipe",
+    "highlight.js",
+    "highlightjs",
+    "syntax"
+  ],
+  "author": "Darshan Shah <mosser@mcmaster.ca>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jpipe-mcscert/highlightjs-jpipe/issues"
+  },
+  "homepage": "https://github.com/jpipe-mcscert/highlightjs-jpipe#readme",
+  "peerDependencies": {
+    "highlight.js": "^11.0.0"
+  }
+}
