@@ -1,19 +1,52 @@
 # highlightjs-jpipe
-Syntax Highlighting for jPipe, using Highlight.js engine
+Syntax Highlighting for JPipe, using Highlight.js engine
 
-For usage, add the cdn to your assets folder, then reference it in your html as tags alongside a stylesheet, core highlightjs engine and a function call.
+## Installation
 
-ex. <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script src="assets/jpipe.min.js"></script>
-    <script>hljs.highlightAll();</script>
+This package provides syntax highlighting for the JPipe language using Highlight.js. To use it, you need to include both the Highlight.js core library and this language definition.
 
-To reference your code, surround it with this tag: <pre><code class="language-jpipe">...</code></pre>
+## Usage
 
-You should be all good to go now!
+### CDN Setup
 
-Here's a couple different stylesheets that work well with jpipe:
-- https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css (light theme)
-- https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css (dark theme)
+Add the following to your HTML:
 
-Implementation example can be found here: https://github.com/DarshanVShah/jpipe-syntax-ex
+```html
+<!-- Highlight.js core library and a theme -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<!-- JPipe language definition -->
+<script src="src/languages/jpipe.js"></script>
+
+<!-- Initialize highlighting -->
+<script>hljs.highlightAll();</script>
+```
+
+### Code Blocks
+
+Wrap your JPipe code with the following HTML:
+
+```html
+<pre><code class="language-jpipe">
+// Your JPipe code here
+evidence example {
+  // evidence content
+}
+</code></pre>
+```
+
+## Recommended Themes
+
+Here are some stylesheets that work well with JPipe syntax highlighting:
+
+- **Light theme**: `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css`
+- **Dark theme**: `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css`
+
+## Examples
+
+For a complete implementation example, see: https://github.com/DarshanVShah/jpipe-syntax-ex
+
+## Development
+
+This package is designed to work with Highlight.js v11.0.0 and above. The main language definition is located in `src/languages/jpipe.js`.
