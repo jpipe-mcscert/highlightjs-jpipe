@@ -30,9 +30,6 @@ Wrap your JPipe code with the following HTML:
 ```html
 <pre><code class="language-jpipe">
 // Your JPipe code here
-evidence example {
-  // evidence content
-}
 </code></pre>
 ```
 
