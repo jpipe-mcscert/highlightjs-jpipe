@@ -12,7 +12,7 @@ export default function(hljs) {
 
   const KEYWORDS = {
     keyword: 'evidence sub conclusion strategy relation hook refine',
-    built_in: 'assemble',
+    built_in: 'assemble is',
     title: 'justification pattern load composition'
   };
 
@@ -36,14 +36,8 @@ export default function(hljs) {
 
       // 2) refine function calls with parameters
       {
-        begin: /\brefine\s*\(/,
-        end: /\)/,
-        returnEnd: true,
-        contains: [
-          { className: 'keyword', begin: /\brefine\b/ },
-          { className: 'variable', begin: IDENT },
-          { className: 'punctuation', begin: /[,()]/ }
-        ]
+        match: /\brefine(?=\s*\()/,
+        className: 'keyword'
       },
 
       // 3) explicit "x supports y" pattern
@@ -65,16 +59,12 @@ export default function(hljs) {
 
       // 5) justification blocks with title
       {
-        className: 'title',
-        begin: /\bjustification\b/,
-        end: /[{(]/,
-        returnEnd: true,
+        begin: /\bjustification\s+([A-Za-z_][A-Za-z0-9_]*)/,
+        returnBegin: true,
+        end: /(?=\s(is|\{|\())|$/,
         contains: [
-          {
-            className: 'variable',
-            begin: new RegExp('(?<=\\bjustification\\s+)' + IDENT),
-            relevance: 0
-          }
+          { className: 'title', begin: /\bjustification\b/ },
+          { className: 'variable', begin: new RegExp('(?<=\\bjustification\\s+)' + IDENT) }
         ]
       },
 
@@ -133,6 +123,19 @@ export default function(hljs) {
       {
         match: /\b(supports|is|assemble)\b/,
         className: 'built_in'
+      },
+
+      // 11) function parameters (variables inside parentheses)
+      {
+        begin: /\(/,
+        end: /\)/,
+        contains: [
+          {
+            match: /\b[A-Za-z_][A-Za-z0-9_]*\b/,
+            className: 'variable'
+          },
+          { className: 'punctuation', begin: /[,]/ }
+        ]
       },
 
       // 11) numbers & punctuation
