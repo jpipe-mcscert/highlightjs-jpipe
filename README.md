@@ -16,8 +16,8 @@ Add the following to your HTML:
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<!-- JPipe language definition -->
-<script src="src/languages/jpipe.js"></script>
+<!-- Add jpipe cdn to your assets folder and reference it -->
+<script src="assets/jpipe.min.js"></script>
 
 <!-- Initialize highlighting -->
 <script>hljs.highlightAll();</script>
